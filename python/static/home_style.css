@@ -1,0 +1,43 @@
+body {
+    background-color: #f7f7f7;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.search-box {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 100px auto;
+}
+
+.search-box h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.form-control {
+    border-radius: 20px;
+}
+
+.btn-search {
+    background-color: #007bff;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 30px;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+}
+
+.btn-search:hover {
+    background-color: #0056b3;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 50px;
+    color: #888;
+}

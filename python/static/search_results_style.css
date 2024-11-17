@@ -1,0 +1,410 @@
+body {
+    background-color:#1e1e2e;
+    color: #000000;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.search-results-header {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.row-panels {
+    display: flex;
+    gap: 20px; /* 두 패널 사이의 간격 설정 */
+}
+
+.left-panel,
+.right-panel {
+    flex: 1; /* 두 패널의 너비를 같게 설정 */
+
+    padding: 20px; /* 패널의 내부 여백 설정 */
+    border-radius: 8px; /* 모서리를 둥글게 설정 */
+}
+
+
+.left-panel {
+    flex: 1;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 120px;
+}
+
+
+.right-panel {
+    
+    flex: 2;
+    box-sizing: border-box;
+    padding: 20px;
+    border-radius: 8px;
+    opacity: 1; 
+    transition: none; 
+}
+
+
+.card {
+    background-color: rgba(17, 18, 37, 0.5); 
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-sizing: border-box;
+    width: auto; 
+    max-width: 100%;
+    height: auto; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+}
+
+.card h5 {
+    font-weight: bold;
+}
+
+.tier-info {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.win-rate {
+    font-size: 22px;
+    font-weight: bold;
+    color: #4299e1;
+}
+
+
+.tier-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+
+.card-section {
+    padding: 15px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.card-section:last-child {
+    border-bottom: none;
+}
+
+
+.table {
+    width: 100%;
+    max-width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+
+.table td {
+    padding: 20px;
+    color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 0;
+    height: 100%;
+}
+
+
+tr.win td {
+    background-color: rgba(46, 72, 156, 0.15);
+    color:  rgba(30, 37, 138, 0.7);
+    font-weight: bold;
+}
+
+tr.loss td {
+    background-color: rgba(229, 62, 62, 0.15);
+    color: #721c24;
+    font-weight: bold;
+}
+
+
+tr.win td:first-child {
+    border-left: 5px solid rgba(30, 37, 138, 0.7);;
+}
+
+tr.loss td:first-child {
+    border-left: 5px solid rgba(229, 62, 62, 0.7);
+}
+
+
+.section1,
+.section2 {
+    min-height: 250px;
+    box-sizing: border-box;
+}
+
+
+.team-sections {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+.section3,
+.section4 {
+    flex: 1;
+    min-height: 250px;
+    background-color: #1e1e2e;
+    padding: 20px;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+
+.section1 {
+    background-color: #1e1e2e;
+    color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+
+.section2 {
+    padding-top: 60px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    background-color: #1e1e2e;
+    border-radius: 8px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+
+.champion-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+
+.champion-container {
+    position: relative;
+}
+
+.champion-image {
+    width: 85px;
+    height: 85px;
+    border-radius: 8px;
+}
+
+.champion-level {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    background-color: #333;
+    color: #fff;
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+
+.runes-spells-kda {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.runes-spells-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.rune-spell {
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+
+.kda-info {
+    text-align: center;
+    padding-top: 20px;
+    font-size: 25px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+
+.items {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.item-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+
+.team-info {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 150px;
+}
+
+
+.our-team,
+.enemy-team {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(5, 1fr);
+    gap: 10px;
+    padding: 0;
+    align-items: flex-start;
+    height: 100%;
+}
+
+.team-member {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.team-champion {
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.summoner-info {
+    display: flex;
+    flex-direction: column;
+    color: #ffffff;
+}
+
+.summoner-name {
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.summoner-tag {
+    font-size: 10px;
+    color: #c4c4c4;
+}
+
+
+
+
+.empty-item {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    background-color: #2e2e2e;
+    border-radius: 4px;
+    vertical-align: middle;
+}
+
+
+.weekly-stats-card {
+    background-color: #2e2e4e; 
+    color: #ffffff;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    display: flex;
+    gap: 20px;
+    justify-content: space-between; 
+    align-items: center;
+    flex-grow: 1; 
+    box-sizing: border-box;
+    min-width: 300px; 
+    max-width: 500px; 
+}
+
+
+.weekly-stats-container {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 20px;
+    justify-content: center; 
+    padding: 20px; 
+    background-color: rgba(255, 255, 255, 0.1); 
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+
+.weekly-stats-section1 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.champion-name {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+
+.weekly-stats-section2 {
+    text-align: center;
+    font-size: 12px;
+    flex: 1; 
+}
+
+.kda {
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.kda-average {
+    color: #bbbbbb;
+    font-size: 12px;
+}
+
+.weekly-stats-section3 {
+    text-align: center;
+    font-size: 16px;
+    flex: 1; 
+
+}
+.win-rate {
+    font-weight: bold;
+    font-size: 15px;
+    color: #4caf50; 
+    white-space: nowrap
+}
+
+.game-count {
+    color: #bbbbbb;
+    font-size: 14px;
+}
+
+.table tr:hover td {
+    background-color: inherit !important;
+    color: inherit !important;
+}
+}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOL 전적 검색</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='home_style.css') }}">
+</head>
+<body>
+    {% if error_message %}
+    <div class="container mt-3">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ error_message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+    {% endif %}
+    <div class="search-box text-center">
+        <h1>LOL 전적 검색</h1>
+        <p class="lead">Riot ID와 태그 라인을 입력하세요</p>
+        <form action="/search" method="POST">
+            <div class="mb-3">
+                <input type="text" class="form-control" name="game_name" placeholder="Riot ID" required>
+            </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" name="tag_line" placeholder="태그 라인" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-search">검색</button>
+        </form>
+    </div>
+    <div class="footer">
+        <p>LOL 전적 검색 © 201804107 전설민</p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

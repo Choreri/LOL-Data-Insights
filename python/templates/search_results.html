@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOL 전적 결과</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='search_results_style.css') }}">
+</head>
+<body>
+    <div class="container mt-5">
+        <!-- 검색 결과 제목과 검색 폼 -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <h1 class="text-center mb-4"></h1>
+                <form action="{{ url_for('search') }}" method="POST" class="mt-4">
+                    <div class="row g-2 justify-content-center align-items-center">
+                        <!-- Riot ID 입력 -->
+                        <div class="col-md-3">
+                            <input type="text" name="game_name" class="form-control" placeholder="Riot ID 입력" required>
+                        </div>
+                        <!-- 태그 입력 -->
+                        <div class="col-md-3">
+                            <input type="text" name="tag_line" class="form-control" placeholder="태그" required>
+                        </div>
+                        <!-- 검색 버튼 -->
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-primary w-100">다시 검색</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- 검색 결과 패널 -->
+        <div class="row row-panels">
+            <!-- 왼쪽 패널 - 솔로랭크 정보 카드 -->
+            <div class="left-panel">
+                {% if solo_rank_info %}
+                    <div class="card">
+                        <h5 style="color: #ffffff;">솔로랭크</h5>
+                        <div class="card-section">
+                            <img src="{{ url_for('static', filename=solo_rank_info.tier_image_url) }}" alt="Tier Image" class="tier-image">
+                        </div>
+                        <div class="card-section">
+                            <div class="tier-info" style="color: #ffffff;">{{ solo_rank_info.tier }} {{ solo_rank_info.rank }} {{ solo_rank_info.lp }} LP</div>
+                        </div>
+                        <div class="card-section">
+                            <div class="win-rate">승률 {{ solo_rank_info.win_rate }}%</div>
+                            <div style="color: #ffffff;">{{ solo_rank_info.wins }}승 {{ solo_rank_info.losses }}패</div>
+                        </div>
+                    </div>
+            
+                    <!-- 주간 챔피언 통계 카드 -->
+                    <div class="card">
+                        <h5 style="color: #ffffff;">주간 챔피언 통계</h5>
+                        {% if weekly_champion_stats %}
+                            <div class="weekly-stats">
+                                {% for champion, stats in weekly_champion_stats.items() %}
+                                    <!-- 주간 챔피언 통계 카드 -->
+                                    <div class="weekly-stats-card">
+                                        <div class="weekly-stats-section1">
+                                            <span class="champion-name">{{ champion }}</span>
+                                        </div>
+                                        <div class="weekly-stats-section2">
+                                            <span class="kda-ratio">{{ stats.kda_ratio }}</span>
+                                            <div class="kda-average">{{ stats.avg_kda }}</div>
+                                        </div>
+                                        <div class="weekly-stats-section3">
+                                            <span class="win-rate">{{ stats.win_rate }}% 승률</span>
+                                            <div class="game-count">{{ stats.games }} 게임</div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <p class="text-muted">주간 통계 정보가 없습니다.</p>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+
+           
+            <div class="right-panel">
+                <div class="search-results-panel">
+                    <table class="table table-hover mt-5">
+                        <tbody>
+                            {% for match in matches %}
+                                <tr class="{% if match.win %}win{% else %}loss{% endif %}">
+                                    <!-- 구간 1: 승리 여부, 몇일 전, 점수 변화 -->
+                                    <td class="section1">
+                                        <div class="match-info">
+                                            <div class="result">{% if match.win %}승리{% else %}패배{% endif %}</div>
+                                        </div>
+                                    </td>
+
+                                    <!-- 구간 2: 챔피언 정보, 룬, 스펠, 아이템 빌드 -->
+                                    <td class="section2">
+                                        <div class="champion-info">
+                                            <div class="champion-container">
+                                                <img src="{{ match.champion_image_url }}" alt="{{ match.champion }}" class="champion-image">
+                                                <span class="champion-level">{{ match.champ_level }}</span>
+                                            </div>
+                                            <div class="runes-spells-kda">
+                                                <div class="runes-spells-grid">
+                                                    <img src="{{ match.rune_primary_url }}" alt="Rune" class="rune-spell">
+                                                    <img src="{{ match.rune2_url }}" alt="Rune" class="rune-spell">
+                                                    <img src="{{ match.spell1_url }}" alt="Spell" class="rune-spell">
+                                                    <img src="{{ match.spell2_url }}" alt="Spell" class="rune-spell">
+                                                </div>
+                                                <div class="kda-info">
+                                                    {{ match.kills }} / {{ match.deaths }} / {{ match.assists }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="items">
+                                            {% for item_url in match.inventory %}
+                                                {% if item_url %}
+                                                    <img src="{{ item_url }}" alt="Item" class="item-image">
+                                                {% else %}
+                                                    <div class="empty-item"></div>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </td>
+
+                                    <!-- 구간 3: 우리팀 정보 -->
+                                    <td class="section3">
+                                        <div class="team-info">
+                                            <div class="our-team">
+                                                {% for teammate in match.our_team %}
+                                                    <div class="team-member">
+                                                        <img src="{{ teammate.champion_image_url }}" alt="Our Team Champion" class="team-champion">
+                                                        <div class="summoner-info">
+                                                            <span class="summoner-name">{{ teammate.riot_id }}</span>
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </td>
+                                    
+                                    <!-- 구간 4: 상대팀 정보 -->
+                                    <td class="section4">
+                                        <div class="team-info">
+                                            <div class="enemy-team">
+                                                {% for enemy in match.enemy_team %}
+                                                    <div class="team-member">
+                                                        <img src="{{ enemy.champion_image_url }}" alt="Enemy Team Champion" class="team-champion">
+                                                        <div class="summoner-info">
+                                                            <span class="summoner-name">{{ enemy.riot_id }}</span>
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </td>
+                                    
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
